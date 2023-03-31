@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// infoCmd represents the info command
+// infoCmd represents the info command.
 var infoCmd = &cobra.Command{
 	Use:   "info",
 	Short: "Show info for package",

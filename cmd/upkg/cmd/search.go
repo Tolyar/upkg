@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// searchCmd represents the search command
+// searchCmd represents the search command.
 var searchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "Search package",

@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// upgradeCmd represents the upgrade command
+// upgradeCmd represents the upgrade command.
 var upgradeCmd = &cobra.Command{
 	Use:   "upgrade",
 	Short: "Upgrade packages",

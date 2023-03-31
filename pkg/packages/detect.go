@@ -19,7 +19,7 @@ func PMName() (string, error) {
 	case "linux":
 		return LinuxPMName()
 	default:
-		return "unknown", fmt.Errorf("Unknown package manager fo %s", os)
+		return "unknown", fmt.Errorf("unknown package manager fo %s", os)
 	}
 }
 
@@ -30,7 +30,7 @@ func LinuxPMName() (string, error) {
 	}
 	id, ok := lr["ID"]
 	if !ok {
-		return "unknown", fmt.Errorf("Unknown ID in /etc/os-release")
+		return "unknown", fmt.Errorf("unknown ID in /etc/os-release")
 	}
 	switch id {
 	case "arch", "artix", "manjaro":
@@ -38,6 +38,7 @@ func LinuxPMName() (string, error) {
 	case "centos", "redhat", "rhel":
 		_, err := exec.LookPath("dnf")
 		if err != nil {
+			//nolint:nilerr
 			return "yum", nil
 		} else {
 			return "dnf", nil
@@ -46,6 +47,7 @@ func LinuxPMName() (string, error) {
 	case "fedora":
 		_, err := exec.LookPath("dnf")
 		if err != nil {
+			//nolint:nilerr
 			return "yum", nil
 		} else {
 			return "dnf", nil
@@ -55,12 +57,14 @@ func LinuxPMName() (string, error) {
 	case "debian", "ubuntu", "astra", "linuxmint":
 		return "apt", nil
 	}
+	//nolint:nestif
 	if idLike, ok := lr["ID_LIKE"]; ok {
 		if strings.Contains(idLike, "debian") {
 			return "apt", nil
 		} else if strings.Contains(idLike, "rhel") {
 			_, err := exec.LookPath("dnf")
 			if err != nil {
+				//nolint:nilerr
 				return "yum", nil
 			} else {
 				return "dnf", nil
@@ -83,5 +87,6 @@ func LinuxPMName() (string, error) {
 	if _, err := exec.LookPath("apk"); err == nil {
 		return "apk", nil
 	}
-	return "unknown", fmt.Errorf("Unknown package for %s", id)
+
+	return "unknown", fmt.Errorf("unknown package for %s", id)
 }

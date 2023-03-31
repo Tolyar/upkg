@@ -13,7 +13,7 @@ import (
 
 // Describe package managers.
 
-/// Set of arguments for package manager.
+// / Set of arguments for package manager.
 type Provider struct {
 	bin           string   // Binary name.
 	info          []string // Show info about package.
@@ -117,6 +117,7 @@ func GetProvider() (*Provider, error) {
 	if !ok {
 		return nil, fmt.Errorf("Provider %s does not supported", pname)
 	}
+
 	return &p, nil
 }
 
@@ -127,21 +128,22 @@ func (p *Provider) run(command []string, args []string) {
 		log.Fatalf("Command %s does not implemented for provider %s", command, p.bin)
 	}
 	args = append(command, args...)
+	//nolint:gosec
 	cmd := exec.Command(p.bin, args...)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
-	err := cmd.Run()
-	if err != nil {
+	if err := cmd.Run(); err != nil {
 		log.Fatal(err)
 	}
 }
 
-func (p *Provider) runWithResult(command []string, args []string) (stdout []string) {
-	stdout = make([]string, 0)
+func (p *Provider) runWithResult(command []string, args []string) []string {
+	stdout := make([]string, 0)
 	if len(command) == 0 || command[0] == "" {
 		log.Fatalf("Command %s does not implemented for provider %s", command, p.bin)
 	}
 	args = append(command, args...)
+	//nolint:gosec
 	cmd := exec.Command(p.bin, args...)
 	cmd.Stderr = os.Stderr
 	s, err := cmd.StdoutPipe()
@@ -159,6 +161,7 @@ func (p *Provider) runWithResult(command []string, args []string) (stdout []stri
 	if err := sc.Err(); err != nil {
 		log.Fatalf("scan file error: %v", err)
 	}
+
 	return stdout
 }
 
@@ -200,12 +203,12 @@ func (p *Provider) Search(args ...string) {
 	p.run(p.search, args)
 }
 
-//  Which packages resource.
+// Which packages resource.
 func (p *Provider) Provides(args ...string) {
 	p.run(p.provides, args)
 }
 
-//  Update packages.
+// Update packages.
 func (p *Provider) UpdateIndex(args ...string) {
 	p.run(p.updateIndex, args)
 }
@@ -226,14 +229,15 @@ func (p *Provider) ParseList(list []string) ([]Package, error) {
 	case "yum", "dnf":
 		return ParseListYUM(list, p.bin), nil
 	}
-	return nil, fmt.Errorf("Can't parse packages list for %s", p.bin)
+
+	return nil, fmt.Errorf("can't parse packages list for %s", p.bin)
 }
 
 // ----- provider specific parsers ----
 
-// "^<package>.<arch>\s+<version>\s+<repo>$"
-func ParseListYUM(list []string, provider string) (pkgs []Package) {
-	pkgs = make([]Package, 0)
+// "^<package>.<arch>\s+<version>\s+<repo>$".
+func ParseListYUM(list []string, provider string) []Package {
+	pkgs := make([]Package, 0)
 	for _, s := range list {
 		parsed := strings.Split(s, " ")
 		// Skip crap.
@@ -254,5 +258,6 @@ func ParseListYUM(list []string, provider string) (pkgs []Package) {
 		}
 		pkgs = append(pkgs, p)
 	}
+
 	return pkgs
 }

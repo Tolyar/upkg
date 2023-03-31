@@ -38,6 +38,9 @@ linters-settings:
 linters:
   enable-all: true
   disable:
+    - wrapcheck
+    - goerr113
+    - goconst
     - gomnd
     - cyclop
     - exhaustivestruct

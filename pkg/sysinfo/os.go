@@ -3,7 +3,7 @@ package sysinfo
 import "runtime"
 
 // Detect OS.
-// Look to go tool dist list, on full OS and platfrom versions.
+// Look to go tool dist list, on full OS and platform versions.
 
 func Platform() string {
 	// linux, darwin(mac os), windows, freebsd, ...

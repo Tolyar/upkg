@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// updateCmd represents the update command
+// updateCmd represents the update command.
 var updateCmd = &cobra.Command{
 	Use:     "update",
 	Short:   "Update indexes of packages",

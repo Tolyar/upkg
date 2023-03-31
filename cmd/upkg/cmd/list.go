@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -11,7 +10,7 @@ import (
 
 var listUpgradable = false
 
-// listCmd represents the list command
+// listCmd represents the list command.
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List installed packages",

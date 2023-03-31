@@ -10,23 +10,24 @@ import (
 
 var cfgFile string
 
-// rootCmd represents the base command when called without any subcommands
+// rootCmd represents the base command when called without any subcommands.
 var rootCmd = &cobra.Command{
 	Use:   "upkg",
 	Short: "Universal package manager",
 	Long:  `upkg can be used instead of yum, dnf, apt, ...`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 0 {
-			_ = cmd.Help()
+			//nolint
+			cmd.Help()
 			os.Exit(0)
 		}
 		os.Exit(0)
 		// pp.Println("OS:", sysinfo.OS())
 		// pp.Println("Arch:", sysinfo.Arch())
 		// if pm, err := packages.PMName(); err == nil {
-		// 	pp.Println("package namager:", pm)
+		// 	pp.Println("package manager:", pm)
 		// } else {
-		// 	pp.Println("package namager is unknown.", err)
+		// 	pp.Println("package manager is unknown.", err)
 		// }
 		// if sysinfo.OS() == "linux" {
 		// 	lr, err := sysinfo.LinuxRelease()
@@ -41,8 +42,7 @@ var rootCmd = &cobra.Command{
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
-	err := rootCmd.Execute()
-	if err != nil {
+	if err := rootCmd.Execute(); err != nil {
 		os.Exit(1)
 	}
 }

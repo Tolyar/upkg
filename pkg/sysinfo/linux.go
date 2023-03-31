@@ -41,5 +41,6 @@ func LinuxRelease() (map[string]string, error) {
 			}
 		}
 	}
+
 	return m, nil
 }

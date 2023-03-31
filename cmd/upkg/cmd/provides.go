@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,11 +8,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// providesCmd represents the provides command
+// providesCmd represents the provides command.
 var providesCmd = &cobra.Command{
 	Use:   "provides",
-	Short: "Show package wich provides resource.",
-	Long: `Show package wich provides resource.
+	Short: "Show package which provides resource.",
+	Long: `Show package which provides resource.
 	Not all providers supports this option.`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {

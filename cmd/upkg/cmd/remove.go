@@ -1,6 +1,5 @@
 /*
-Copyright © 2022 none
-
+Copyright © 2022 Tolyar
 */
 package cmd
 
@@ -9,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// removeCmd represents the remove command
+// removeCmd represents the remove command.
 var removeCmd = &cobra.Command{
 	Use:   "remove",
 	Short: "Remove packages",
