@@ -233,6 +233,11 @@ func (p *Provider) ParseList(list []string) ([]Package, error) {
 	return nil, fmt.Errorf("can't parse packages list for %s", p.bin)
 }
 
+// Return name of detected providers.
+func (p *Provider) Name() string {
+	return p.bin
+}
+
 // ----- provider specific parsers ----
 
 // "^<package>.<arch>\s+<version>\s+<repo>$".
